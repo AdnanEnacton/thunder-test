@@ -1,0 +1,97 @@
+---
+import { ChevronRight } from "@lucide/astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  heading: string;
+  subheading: string;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  trustedCount: string;
+  brands: { src: string }[];
+  heroImage: string;
+}
+
+const {
+  heading,
+  subheading,
+  primaryCtaLabel,
+  primaryCtaHref,
+  secondaryCtaLabel,
+  secondaryCtaHref,
+  trustedCount,
+  brands,
+  heroImage,
+} = Astro.props;
+---
+
+<section class="section section-hero">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+      <div class="text-center md:text-left">
+        <h1 class="dark:text-black">
+          {heading}
+        </h1>
+        <p class="subtitle">
+          {subheading}
+        </p>
+        <div
+          class="flex gap-3 item-center justify-center flex-wrap mt-8 mx-auto md:justify-start"
+        >
+          <a
+            href={primaryCtaHref}
+            class="btn btn-lg w-full sm:w-auto rounded-md bg-main hover:bg-blue-600 border-main text-white font-light"
+          >
+            {primaryCtaLabel}
+            <ChevronRight size="14" />
+          </a>
+          <a
+            href={secondaryCtaHref}
+            class="btn btn-lg w-full sm:w-auto rounded-md bg-white text-main font-light"
+          >
+            {secondaryCtaLabel}
+            <ChevronRight size="14" />
+          </a>
+        </div>
+
+        <div class="mt-8 sm:mt-20">
+          <p class="dark:text-black">
+            Trusted by <b class="text-main">{trustedCount}</b> Companies
+          </p>
+          <div
+            class="flex flex-wrap gap-2 items-center mt-4 justify-center md:justify-start"
+          >
+            {
+              brands.map((brand, index) => (
+                <Image
+                  width={136}
+                  height={72}
+                  src={brand.src}
+                  alt={`Brand ${index + 1}`}
+                  class="h-15 w-auto"
+                  format="webp"
+                  quality={80}
+                  fetchpriority="high"
+                />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <div class="-mb-20 mt-auto">
+        <Image
+          width={560}
+          height={646}
+          src={heroImage}
+          alt="Hero Image"
+          class="w-full h-auto mx-auto"
+          format="webp"
+          quality={80}
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </div>
+</section>

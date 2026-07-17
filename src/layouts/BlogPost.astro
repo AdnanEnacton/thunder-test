@@ -5,7 +5,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import "../styles/blog-post.css";
 
 import Layout from "./Main.astro";
-import Subscribe from "../components/blogpage/Subscribe.astro";
+import Subscribe from "../components/blocks/Subscribe.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -77,7 +77,10 @@ import { ArrowLeft } from "@lucide/astro";
         <slot />
 
         <a href="../" class="btn mt-8"> <ArrowLeft /> Back to Blog</a>
-        <Subscribe />
+        <Subscribe
+          heading="Sign up for newsletter"
+          body="Get exclusive tips and updates on payment solutions delivered straight to your inbox."
+        />
       </div>
     </article>
   </div>

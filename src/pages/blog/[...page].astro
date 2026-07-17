@@ -2,10 +2,10 @@
 import { getCollection } from "astro:content";
 
 import Layout from "../../layouts/Main.astro";
-import BannerCTA from "../../components/blogpage/BannerCTA.astro";
-import BlogCard from "../../components/blogpage/BlogCard.astro";
-import BlogVideoPosts from "../../components/blogpage/BlogVideoPosts.astro";
-import Subscribe from "../../components/blogpage/Subscribe.astro";
+import BannerCTA from "../../components/blocks/BannerCTA.astro";
+import BlogCard from "../../components/content-cards/BlogCard.astro";
+import BlogVideoPosts from "../../components/content-cards/BlogVideoPosts.astro";
+import Subscribe from "../../components/blocks/Subscribe.astro";
 import { ArrowRight, ArrowLeft } from "@lucide/astro";
 
 export async function getStaticPaths({ paginate }) {
@@ -80,8 +80,17 @@ const totalPages = Math.ceil(page.total / page.size);
         }
       </div>
     </section>
-    <BannerCTA />
+    <BannerCTA
+      heading="Tap to Pay, Simplify Your Day"
+      body="Experience the ease of contactless payments with Zeepay. Just tap and go secure, fast, and hassle-free for all your transactions."
+      buttonLabel="Know more"
+      buttonHref="#"
+      backgroundImage="/img/bg/blog-cta.jpg"
+    />
     <BlogVideoPosts />
-    <Subscribe />
+    <Subscribe
+      heading="Sign up for newsletter"
+      body="Get exclusive tips and updates on payment solutions delivered straight to your inbox."
+    />
   </div>
 </Layout>

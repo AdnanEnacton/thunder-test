@@ -1,0 +1,184 @@
+---
+import { CircleCheck } from "@lucide/astro";
+
+interface PricingPlan {
+  name: string;
+  priceMonthly: string;
+  priceYearly: string;
+  description: string;
+  featured: boolean;
+  features: string[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+interface Props {
+  heading: string;
+  subheading: string;
+  discountNote: string;
+  plans: PricingPlan[];
+}
+
+const { heading, subheading, discountNote, plans } = Astro.props;
+---
+
+<section class="section bg-white text-dark my-0! pt-20">
+  <div class="container">
+    <div class="max-w-xl mx-auto text-center mb-10">
+      <h1 class="dark:text-black">{heading}</h1>
+      <p class="subtitle">
+        {subheading}
+      </p>
+    </div>
+
+    <p class="text-center dark:text-black">{discountNote}</p>
+
+    <div class="mt-5 grid w-full">
+      <div
+        class="tabs mx-auto justify-center rounded-full border border-black/30 inline-flex mx-auto"
+      >
+        <button class="tab tab-active" data-tab="monthly">Monthly</button>
+        <button class="tab" data-tab="yearly">Yearly</button>
+      </div>
+
+      <!-- Content -->
+      <div class="mt-10 w-full!">
+        <div class="tab-content w-full!" data-content="monthly">
+          <div
+            class="flex flex-wrap lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full"
+          >
+            {
+              plans.map((plan) => (
+                <article
+                  class:list={[
+                    "p-6 rounded-xl w-full grid md:grid-cols-3 lg:grid-cols-1 items-center",
+                    plan.featured
+                      ? "bg-custom-blue-300 text-white"
+                      : "bg-custom-light-100 text-custom-grey-100",
+                  ]}
+                >
+                  <div>
+                    <h2 class="text-lg mb-2">{plan.name}</h2>
+                    <div class="flex gap-2 items-end">
+                      <p
+                        class:list={[
+                          "text-3xl font-bold",
+                          !plan.featured && "text-black",
+                        ]}
+                      >
+                        {plan.priceMonthly}
+                      </p>
+                      <small class:list={[plan.featured && "opacity-80"]}>
+                        per month
+                      </small>
+                    </div>
+                    <p class="text-sm mb-4 mt-3">{plan.description}</p>
+                  </div>
+                  <hr class="border-dashed opacity-50 mb-4 block md:hidden ld:block" />
+                  <ul class="mb-6 space-y-2 text-xs">
+                    {plan.features.map((feature) => (
+                      <li class="grid grid-cols-[16px_1fr] items-center gap-1">
+                        <CircleCheck size={16} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={plan.ctaHref}
+                    class:list={[
+                      "btn btn-outline w-full rounded-md font-normal",
+                      plan.featured
+                        ? "border-main bg-main text-white shadow-none hover:bg-blue-600"
+                        : "border-main text-main hover:bg-main hover:text-white",
+                    ]}
+                  >
+                    {plan.ctaLabel}
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="tab-content hidden!" data-content="yearly">
+          <div
+            class="flex flex-wrap lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr] gap-10 w-full"
+          >
+            {
+              plans.map((plan) => (
+                <article
+                  class:list={[
+                    "p-6 rounded-xl w-full grid md:grid-cols-3 lg:grid-cols-1 items-center",
+                    plan.featured
+                      ? "bg-custom-blue-300 text-white"
+                      : "bg-custom-light-100 text-custom-grey-100",
+                  ]}
+                >
+                  <div>
+                    <h2 class="text-lg mb-2">{plan.name}</h2>
+                    <div class="flex gap-2 items-end">
+                      <p
+                        class:list={[
+                          "text-3xl font-bold",
+                          !plan.featured && "text-black",
+                        ]}
+                      >
+                        {plan.priceYearly}
+                      </p>
+                      <small class:list={[plan.featured && "opacity-80"]}>
+                        per month
+                      </small>
+                    </div>
+                    <p class="text-sm mb-4 mt-3">{plan.description}</p>
+                  </div>
+                  <hr class="border-dashed opacity-50 mb-4 block md:hidden ld:block" />
+                  <ul class="mb-6 space-y-2 text-xs">
+                    {plan.features.map((feature) => (
+                      <li class="grid grid-cols-[16px_1fr] items-center gap-1">
+                        <CircleCheck size={16} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={plan.ctaHref}
+                    class:list={[
+                      "btn btn-outline w-full rounded-md font-normal",
+                      plan.featured
+                        ? "border-main bg-main text-white shadow-none hover:bg-blue-600"
+                        : "border-main text-main hover:bg-main hover:text-white",
+                    ]}
+                  >
+                    {plan.ctaLabel}
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll("[data-tab]");
+    const contents = document.querySelectorAll("[data-content]");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+
+        // active tab
+        tabs.forEach((t) => t.classList.remove("tab-active"));
+        tab.classList.add("tab-active");
+
+        // switch content
+        contents.forEach((c) => {
+          c.classList.toggle("hidden!", c.dataset.content !== target);
+        });
+      });
+    });
+  });
+</script>

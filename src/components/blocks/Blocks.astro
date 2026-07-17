@@ -1,0 +1,42 @@
+---
+type BlockData = Record<string, unknown>;
+
+interface Props {
+  blocks?: BlockData[];
+}
+
+const modules = import.meta.glob<{ default: unknown }>(
+  "/src/components/blocks/**/*.astro",
+  { eager: true },
+);
+
+function keyFor(path: string): string {
+  const name = path.split("/").pop()!.replace(/\.astro$/, "");
+  const words = name
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .split(/\s+/);
+  return words
+    .map((word, index) =>
+      index === 0
+        ? word.toLowerCase()
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+    )
+    .join("");
+}
+
+const BLOCK_COMPONENTS: Record<string, unknown> = {};
+for (const [path, mod] of Object.entries(modules)) {
+  if (path.endsWith("/Blocks.astro")) continue;
+  BLOCK_COMPONENTS[keyFor(path)] = mod.default;
+}
+
+const { blocks = [] } = Astro.props;
+---
+
+{
+  blocks.map((block) => {
+    const Component = BLOCK_COMPONENTS[block._template as string] as any;
+    return Component ? <Component {...block} /> : null;
+  })
+}

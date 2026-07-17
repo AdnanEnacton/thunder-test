@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  avatar: string;
+}
+
+interface Props {
+  heading: string;
+  testimonials: Testimonial[];
+}
+
+const { heading, testimonials } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <h2 class="h3 text-center">{heading}</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        testimonials.map((testimonial, index) => (
+          <article
+            class:list={[
+              "p-10 rounded-xl",
+              index % 2 === 0 ? "bg-custom-light-100" : "bg-custom-blue-100",
+            ]}
+          >
+            <p class="text-sm">{testimonial.quote}</p>
+            <div class="flex flex-wrap gap-2 items-center justify-start mt-4">
+              <Image
+                width={40}
+                height={40}
+                src={testimonial.avatar}
+                alt={testimonial.author}
+                class="rounded-full w-10 h-10 object-cover"
+                format="webp"
+                quality={80}
+              />
+              <div class="flex flex-wrap gap-0 flex-col">
+                <b>{testimonial.author},</b>
+                <span style="text-custom-grey-100"> {testimonial.role}</span>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

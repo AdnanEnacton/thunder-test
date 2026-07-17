@@ -8,15 +8,14 @@ const blog = defineCollection({
     pattern: "**/*.{md,mdx}",
   }),
 
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      heroImage: image().optional(),
-      category: z.string(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    category: z.string(),
+  }),
 });
 
 const videoLibrary = defineCollection({
@@ -25,18 +24,31 @@ const videoLibrary = defineCollection({
     pattern: "**/*.{md,mdx}",
   }),
 
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      heroImage: image().optional(),
-      watch: z.number(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    watch: z.number(),
+  }),
+});
+
+const pages = defineCollection({
+  loader: glob({
+    base: "./src/content/pages",
+    pattern: "**/*.md",
+  }),
+
+  schema: z.object({
+    title: z.string(),
+    type: z.literal("component"),
+    blocks: z.array(z.record(z.string(), z.unknown())),
+  }),
 });
 
 export const collections = {
   blog,
   videoLibrary,
+  pages,
 };

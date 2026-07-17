@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+
+interface Step {
+  image: string;
+  badge: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  heading: string;
+  steps: Step[];
+}
+
+const { heading, steps } = Astro.props;
+---
+
+<section class="section section-how-works">
+  <div class="container">
+    <h2 class="h3 dark:text-black">{heading}</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        steps.map((step) => (
+          <article>
+            <div class="mb-8">
+              <Image
+                width={600}
+                height={450}
+                src={step.image}
+                alt=""
+                class="aspect-ratio-1/1 rounded-lg"
+                format="webp"
+                quality={80}
+              />
+            </div>
+            <div>
+              <span class="bg-custom-blue-100 text-custom-blue-400 text-sm px-3 py-1 rounded-full">
+                {step.badge}
+              </span>
+              <h3 class="h5 mt-4 mb-3 dark:text-black">{step.title}</h3>
+              <p class="mt-2 text-custom-grey-100">{step.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Main.astro";
+import Blocks from "../components/blocks/Blocks.astro";
+import Table from "../components/static/Table.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+  return pages.map((page) => ({
+    params: { slug: page.id === "home" ? undefined : page.id },
+    props: page,
+  }));
+}
+
+const page = Astro.props;
+---
+
+<Layout>
+  <Blocks blocks={page.data.blocks} />
+  {page.id === "pricing" && <Table />}
+</Layout>

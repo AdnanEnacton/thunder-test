@@ -1,0 +1,34 @@
+---
+import { ChevronRight } from "@lucide/astro";
+
+interface Props {
+  heading: string;
+  body: string;
+  buttonLabel: string;
+  buttonHref: string;
+  backgroundImage: string;
+}
+
+const { heading, body, buttonLabel, buttonHref, backgroundImage } =
+  Astro.props;
+---
+
+<div
+  class="section flex rounded-2xl bg-cover bg-center bg-no-repeat p-10 text-white"
+  style={`background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${backgroundImage})`}
+>
+  <div class="ml-auto max-w-md">
+    <h3 class="h3">{heading}</h3>
+    <p class="opacity-80">
+      {body}
+    </p>
+
+    <a
+      href={buttonHref}
+      class="btn btn-lg w-full sm:w-auto rounded-md bg-white text-main font-light mt-10"
+    >
+      {buttonLabel}
+      <ChevronRight size="14" />
+    </a>
+  </div>
+</div>

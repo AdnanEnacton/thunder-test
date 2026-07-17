@@ -1,0 +1,63 @@
+---
+import Form from "../forms/FormContact.astro";
+
+interface ContactMethod {
+  icon: string;
+  label: string;
+  value: string;
+  href: string;
+}
+
+interface Props {
+  heading: string;
+  subheading: string;
+  methods: ContactMethod[];
+}
+
+const { heading, subheading, methods } = Astro.props;
+---
+
+<section class="section my-0! py-10 lg:py-20 bg-custom-blue-100">
+  <div class="container">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div>
+        <h1 class="h2">{heading}</h1>
+        <p class="subtitle">
+          {subheading}
+        </p>
+        <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
+          {
+            methods.map((method) => (
+              <div class="bg-white rounded-xl p-6 grid grid-cols-[56px_1fr] gap-3">
+                <div class="rounded-full border border-black/20 p-4 flex items-center justify-center">
+                  <svg class="icon" width="26" height="26">
+                    <use xlink:href={`#${method.icon}`} />
+                  </svg>
+                </div>
+                <div class="text-custom-grey-100">
+                  <p>{method.label}</p>
+                  <a
+                    href={method.href}
+                    class="text-main font-semibold text-xl underline hover:no-underline"
+                  >
+                    {method.value}
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div>
+        <div class="bg-white rounded-xl p-4 md:p-10">
+          <h2 class="h3">We'll get in touch shortly</h2>
+          <p class="subtitle text-base">
+            We're here to answer your questions and provide personalized
+            assistance!
+          </p>
+          <Form />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

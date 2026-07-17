@@ -1,33 +1,20 @@
 ---
 import { ChevronRight } from "@lucide/astro";
 
-const faqs = [
-  {
-    question: "What is Zeepay?",
-    answer:
-      "Zeepay is a secure, user-friendly online payment app that allows users to send and receive money, pay bills, and manage transactions effortlessly.",
-  },
-  {
-    question: "How do I sign up for Zeepay?",
-    answer:
-      "Download the app or visit the website, then click “Sign Up” and follow the registration process.",
-  },
-  {
-    question: "Is Zeepay safe to use?",
-    answer:
-      "Yes. Zeepay uses encryption, secure authentication, and fraud protection measures to keep your transactions and personal data safe.",
-  },
-  {
-    question: "What payment methods does Zeepay support?",
-    answer:
-      "Zeepay supports bank cards, mobile wallets, bank transfers, and other popular payment methods depending on your region.",
-  },
-  {
-    question: "Can I pay bills using Zeepay?",
-    answer:
-      "Yes. You can pay utility bills, subscriptions, and other services directly through the Zeepay app.",
-  },
-];
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  heading: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+  faqs: FaqItem[];
+}
+
+const { heading, body, ctaLabel, ctaHref, faqs } = Astro.props;
 
 // FAQ Schema
 const faqSchema = {
@@ -51,18 +38,17 @@ const faqSchema = {
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <div>
-        <h2 class="h3 dark:text-black">Frequently asked questions</h2>
+        <h2 class="h3 dark:text-black">{heading}</h2>
 
         <p class="text-base text-custom-grey-100 mb-8">
-          Find quick solutions and helpful tips for using Zeepay. We’ve compiled
-          answers to the most frequently asked questions right here.
+          {body}
         </p>
 
         <a
-          href="/contact"
+          href={ctaHref}
           class="btn btn-lg w-full sm:w-auto rounded-md bg-main hover:bg-blue-600 border-main text-white font-light"
         >
-          Contact support
+          {ctaLabel}
           <ChevronRight size="14" />
         </a>
       </div>

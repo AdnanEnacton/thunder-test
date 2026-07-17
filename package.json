@@ -25,6 +25,8 @@
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
-    "daisyui": "^5.5.19"
+    "@astrojs/check": "^0.9.9",
+    "daisyui": "^5.5.19",
+    "typescript": "^6.0.3"
   }
 }

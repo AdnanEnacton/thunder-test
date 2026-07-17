@@ -1,5 +1,12 @@
 ---
-import { Mail, ChevronRight, KeyRound, UserRound } from "@lucide/astro";
+import { Mail, ChevronRight } from "@lucide/astro";
+
+interface Props {
+  heading: string;
+  body: string;
+}
+
+const { heading, body } = Astro.props;
 ---
 
 <section class="section">
@@ -8,15 +15,13 @@ import { Mail, ChevronRight, KeyRound, UserRound } from "@lucide/astro";
       class="bg-custom-blue-300 bg-[url('/img/bg/subscribe-cta.svg')] bg-no-repeat bg-cover text-white rounded-2xl p-6 sm:p-10 lg:p-20 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center"
     >
       <div>
-        <h2 class="h3">Sign up for newsletter</h2>
+        <h2 class="h3">{heading}</h2>
         <p class="opcity-80">
-          Get exclusive tips and updates on payment solutions delivered straight
-          to your inbox.
+          {body}
         </p>
       </div>
       <div>
-        <form action="#" class="form-subscri" method="POS
-        T">
+        <form action="#" class="form-subscri" method="POST">
           <div class="flex flex-wrap gap-3 items-center">
             <fieldset class="fieldset flex-1 overflow-hidden">
               <label class="input validator join-item w-full bg-white">
