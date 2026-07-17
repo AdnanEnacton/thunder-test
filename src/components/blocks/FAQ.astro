@@ -1,5 +1,6 @@
 ---
 import { ChevronRight } from "@lucide/astro";
+import { marked } from "marked";
 
 interface FaqItem {
   question: string;
@@ -67,7 +68,10 @@ const faqSchema = {
 
               <div class="collapse-title font-semibold">{faq.question}</div>
 
-              <div class="collapse-content text-sm">{faq.answer}</div>
+              <div
+                class="collapse-content text-sm [&_a]:underline [&_a]:text-main [&_ul]:list-disc [&_ul]:pl-5"
+                set:html={marked.parse(faq.answer, { async: false }) as string}
+              />
             </div>
           ))
         }
