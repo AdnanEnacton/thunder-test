@@ -640,22 +640,39 @@ the editor/staging/main branch flow later if you want a review step before chang
 
 ## 13. Execution checklist
 
-- [ ] §3 — delete `*copy.md` duplicates, decide on hero-image location
-- [ ] §4 — add `Props` interfaces to the 12 target components, wire `Astro.props` in each template
-- [ ] §5 — move files into `src/components/blocks/`, `content-cards/`, `forms/`, `static/`;
+- [x] §3 — delete `*copy.md` duplicates, decide on hero-image location. **Done**: duplicates
+      removed, hero images moved to `public/img/blog/` and `public/img/video-library/`,
+      frontmatter updated. Also updated `src/content.config.ts` (which the plan didn't know
+      existed) from `image()` to plain `z.string()` for `heroImage`, since `image()` can't
+      resolve `public/` paths.
+- [x] §4 — add `Props` interfaces to the 12 target components, wire `Astro.props` in each
+      template. **Done**, including two small pre-existing bug fixes surfaced by the refactor
+      (a mismatched avatar `width`/`height` in `Review.astro`, a stray literal newline breaking
+      `method="POST"` in `Subscribe.astro`).
+- [x] §5 — move files into `src/components/blocks/`, `content-cards/`, `forms/`, `static/`;
       rename `ContactHero.astro` / `ContactReview.astro`; fix all `import` paths in
-      `src/pages/*.astro`
-- [ ] §9 — create `src/content/pages/{home,pricing,contact}.md`; delete `index.astro`,
+      `src/pages/*.astro`. **Done.**
+- [x] §9 — create `src/content/pages/{home,pricing,contact}.md`; delete `index.astro`,
       `pricing.astro`, `contact.astro`; add one `src/pages/[...slug].astro` catch-all
       (`getStaticPaths()` + `getCollection('pages')`, same pattern as `blog/[...slug].astro`);
-      verify `npm run build` still passes
-- [ ] Commit and push all of the above to `AdnanEnacton/thunder-test` (still a plain, standalone
-      Astro site at this point — nothing Thunder-specific yet, it should build and deploy exactly
-      as before)
+      verify `npm run build` still passes. **Done** — also registered the `pages` collection in
+      `content.config.ts` (not mentioned in the plan's §9.3 fallback, needed regardless).
+- [x] Commit and push all of the above to `AdnanEnacton/thunder-test`. **Done** — commit `36ad3d3`
+      on `master`, pushed. Verified live via `astro preview` + `curl` against every route (home,
+      pricing, contact, blog list, blog post, 404 on unknown paths). One pre-existing, out-of-scope
+      gap noted: `/video-library/*` routes are linked from `VideoPostCard.astro` but no page file
+      for them has ever existed in this repo.
 - [ ] §7 — connect the repo in Thunder CMS, run the setup wizard with the exact values listed,
-      set Components folder in Project Settings
-- [ ] §8 — scan components, review, accept into the registry
-- [ ] §10 — generate and commit `Blocks.astro`
+      set Components folder in Project Settings. **Not done — requires a running Thunder CMS
+      instance and interactive GitHub OAuth authorization; this is a manual step only you can
+      perform.**
+- [ ] §8 — scan components, review, accept into the registry. **Not done — same reason as §7,
+      depends on being connected first.**
+- [x] §10 — generate and commit `Blocks.astro`. **Done** — also corrected the `keyFor` key
+      derivation to a proper camelCase mapper (the plan's own §9.1 example `_template: cta` and
+      §10's literal `keyFor` snippet disagreed — the naive version would have produced `cTA`/`fAQ`
+      for `CTA.astro`/`FAQ.astro`).
 - [ ] Open Home/Pricing/Contact in the page builder, confirm every block's fields match its live
       component, do a trial edit + save, confirm the commit landed in GitHub and the site still
-      renders correctly on your next deploy
+      renders correctly on your next deploy. **Not done — depends on §7/§8 being completed in the
+      Thunder UI first.**
