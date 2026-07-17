@@ -12,17 +12,8 @@ const modules = import.meta.glob<{ default: unknown }>(
 
 function keyFor(path: string): string {
   const name = path.split("/").pop()!.replace(/\.astro$/, "");
-  const words = name
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .split(/\s+/);
-  return words
-    .map((word, index) =>
-      index === 0
-        ? word.toLowerCase()
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-    )
-    .join("");
+  if (/^[A-Z]+$/.test(name)) return name;
+  return name.charAt(0).toLowerCase() + name.slice(1);
 }
 
 const BLOCK_COMPONENTS: Record<string, unknown> = {};

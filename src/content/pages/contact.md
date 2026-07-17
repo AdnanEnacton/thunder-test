@@ -39,7 +39,7 @@ blocks:
         role: "Small Business Owner"
         avatar: "/img/comments/ava1.png"
 
-  - _template: cta
+  - _template: CTA
     heading: "Get Started with Zeepay Today"
     body: "Experience seamless, secure transactions at your fingertips. Sign up now and simplify your payments with just a few taps!"
     buttonLabel: "Get started now"

@@ -70,7 +70,7 @@ blocks:
         role: "Small Business Owner"
         avatar: "/img/comments/ava1.png"
 
-  - _template: faq
+  - _template: FAQ
     heading: "Frequently asked questions"
     body: "Find quick solutions and helpful tips for using Zeepay. We've compiled answers to the most frequently asked questions right here."
     ctaLabel: "Contact support"
@@ -87,7 +87,7 @@ blocks:
       - question: "Can I pay bills using Zeepay?"
         answer: "Yes. You can pay utility bills, subscriptions, and other services directly through the Zeepay app."
 
-  - _template: cta
+  - _template: CTA
     heading: "Get Started with Zeepay Today"
     body: "Experience seamless, secure transactions at your fingertips. Sign up now and simplify your payments with just a few taps!"
     buttonLabel: "Get started now"
