@@ -1,0 +1,95 @@
+---
+const today = new Date();
+import Logo from "./Logo.astro";
+---
+
+<footer
+  class="footer flex-col w-full text-custom-grey-100 gap-y-0 gap-x-10 bg-white text-black"
+>
+  <div class="footer-top w-full pt-15 pb-10">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
+        <div>
+          <Logo />
+          <p class="mt-4">
+            Find quick solutions and helpful tips for using Zeepay. We’ve
+            compiled answers to the most frequently asked questions right here.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <h3 class="text-lg font-semibold text-black mb-3">About</h3>
+            <nav class="grid gap-2">
+              <a href="#" class="hover:underline"> Our story </a>
+              <a href="#" class="hover:underline"> Careers </a>
+              <a href="#" class="hover:underline"> Blog </a>
+              <a href="#" class="hover:underline"> Contact Us </a>
+            </nav>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-black mb-3">Resources</h3>
+            <nav class="grid gap-2">
+              <a href="#" class="hover:underline"> Help Center </a>
+              <a href="#" class="hover:underline"> API Documentation </a>
+              <a href="#" class="hover:underline"> Community </a>
+              <a href="#" class="hover:underline"> Partners </a>
+            </nav>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-black mb-3">Products</h3>
+            <nav class="grid gap-2">
+              <a href="#" class="hover:underline"> For Personal </a>
+              <a href="#" class="hover:underline"> For Business </a>
+              <a href="#" class="hover:underline"> Payment Solutions </a>
+              <a href="#" class="hover:underline"> Integrations </a>
+            </nav>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-black mb-3">Support</h3>
+            <nav class="grid gap-2">
+              <a href="#" class="hover:underline"> Customer Support </a>
+              <a href="#" class="hover:underline"> FAQ </a>
+              <a href="#" class="hover:underline"> Report a Problem </a>
+              <a href="#" class="hover:underline"> Security & Privacy </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-btm py-8 w-full">
+    <div class="container border-t border-base-300 dark:border-black/10 pt-8">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <nav class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a href="/policy" class="hover:underline">Privacy Policy</a>
+          <a href="/cookie" class="hover:underline">Cookie Policy</a>
+          <a href="/legal" class="hover:underline">Legal</a>
+        </nav>
+        <p>&copy; {today.getFullYear()} Zeepay Financial Services</p>
+
+        <nav class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a href="#" target="_blank" title="twitter">
+            <svg class="icon" width="24" height="24">
+              <use xlink:href="#soc-twitter"></use>
+            </svg>
+          </a>
+          <a href="#" target="_blank" title="linkedin">
+            <svg class="icon" width="24" height="24">
+              <use xlink:href="#soc-linkedin"></use>
+            </svg>
+          </a>
+          <a href="#" target="_blank" title="facebook">
+            <svg class="icon" width="24" height="24">
+              <use xlink:href="#soc-facebook"></use>
+            </svg>
+          </a>
+          <a href="#" target="_blank" title="instagram">
+            <svg class="icon" width="24" height="24">
+              <use xlink:href="#soc-instagram"></use>
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,93 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <SEO /> component.
+import "../styles/global.css";
+import type { ImageMetadata } from "astro";
+import FallbackImage from "../assets/SEO/og-1200x630.jpg";
+import { SITE_TITLE } from "../consts";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const { title, description, image = FallbackImage } = Astro.props;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={SITE_TITLE}
+  href={new URL("rss.xml", Astro.site)}
+/>
+<meta name="generator" content={Astro.generator} />
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- JSON-LD Structured Data -->
+<script async type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@type": "Organization",
+    "name": "ZeePay Fintech",
+    "brand": "ZeePay Fintech",
+    "alternateName": "ZeePay",
+    "url": "https://zeepay-lyart.vercel.app",
+    "logo": "/favicon/android-chrome-512x512.png",
+    "description": "ZeePay Fintech provides secure digital payment and fintech solutions.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "L.K. Road",
+      "addressLocality": "Vashi",
+      "addressRegion": "Maharashtra",
+      "postalCode": "410200",
+      "addressCountry": "IN"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+444572008200",
+        "email": "info@zeepay.com",
+        "contactType": "customer support",
+        "areaServed": "EN",
+        "availableLanguage": ["Englishn"]
+      }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/company/zeepay",
+      "https://x.com/zeepay",
+      "https://facebook.com/zeepay",
+      "https://github.com/anastasiiaxfr/zeepay"
+    ]
+  }
+</script>

@@ -1,0 +1,128 @@
+@import "@fontsource/inter";
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-main: #2667ff;
+  --color-custom-blue-100: #ebf1ff;
+  --color-custom-blue-200: #2667ff;
+  --color-custom-blue-300: #001a57;
+  --color-custom-blue-400: #2662F3;
+  --color-custom-light-100: #f8fafc;
+  --color-custom-grey-100: #5D6F8D;
+}
+
+@layer base {
+  h1,
+  .h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6;
+  }
+
+  h2,
+  .h2 {
+    @apply text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold mb-6;
+  }
+
+  h3,
+  .h3 {
+    @apply text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-bold mb-6;
+  }
+
+  h4,
+  .h4 {
+    @apply text-xl md:text-2xl lg:text-2xl xl:text-2xl font-bold mb-5;
+  }
+
+  h5,
+  .h5 {
+    @apply text-lg md:text-xl lg:text-xl xl:text-xl font-bold mb-5;
+  }
+
+  .subtitle {
+    @apply text-base sm:text-lg md:text-lg text-gray-600 mb-8;
+  }
+}
+
+html,
+body {
+  @apply flex flex-col min-h-screen;
+}
+
+.logo {
+  @apply flex gap-2 items-center text-2xl font-bold text-black;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4;
+}
+
+.section {
+  @apply my-20;
+}
+
+.section-hero {
+  @apply my-0 py-20 bg-custom-blue-100 bg-[url('/img/bg/bg1.svg')] bg-no-repeat bg-[position:70%_bottom];
+}
+
+.section-how-works,
+.section-faq {
+  @apply my-0 py-20 bg-custom-light-100;
+}
+
+.section-cta {
+  @apply my-0 py-20 bg-custom-blue-100 bg-[url('/img/bg/bg2.svg')] bg-no-repeat bg-cover bg-[position:50%_bottom] text-white;
+}
+
+#reviewSwiper .swiper-slide {
+  opacity: 1;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  #reviewSwiper .swiper-slide-active {
+    @apply bg-custom-light-100 opacity-100 z-10;
+  }
+}
+
+@media (min-width: 1024px) {
+  #reviewSwiper .swiper-slide-active + * {
+    @apply bg-custom-light-100 opacity-100 z-10;
+  }
+}
+
+#reviewSwiper .swiper-pagination {
+  @apply !relative mt-10;
+}
+
+.tab-content {
+  @apply block;
+}
+
+.tab-active {
+  @apply bg-main text-white! rounded-full;
+}
+
+.tab {
+  @apply px-6 py-3 h-auto dark:text-black;
+}
+
+.validator-hint {
+  display: none;
+}
+
+.validator {
+  &:user-invalid,
+  &:has(:user-invalid),
+  &[aria-invalid]:not([aria-invalid="false"]),
+  &:has([aria-invalid]:not([aria-invalid="false"])) {
+    & ~ .validator-hint {
+      visibility: visible;
+      height: auto;
+      display: block;
+    }
+  }
+}
+

@@ -1,0 +1,41 @@
+---
+import Navabar from "../components/Navbar.astro";
+import Logo from "../components/Logo.astro";
+import { Menu, ChevronRight } from "@lucide/astro";
+
+const isHome = Astro.url.pathname === "/";
+---
+
+<header class:list={[isHome ? "bg-custom-blue-100" : "bg-white"]}>
+  <div class="navbar w-full">
+    <div class="container flex items-center justify-between">
+      <div class="mr-auto">
+        <Logo />
+      </div>
+      <Navabar />
+      <div class="hidden sm:flex gap-2 items-center ml-auto">
+        <a
+          href="/login"
+          class="btn btn-sm rounded-md bg-white text-main font-light"
+          >Login
+          <ChevronRight size="14" />
+        </a>
+        <a
+          href="/signup"
+          class="btn btn-sm rounded-md bg-main hover:bg-blue-600 border-main text-white font-light"
+          >Sign Up
+          <ChevronRight size="14" /></a
+        >
+      </div>
+      <div class="flex-none lg:hidden">
+        <label
+          for="my-drawer-2"
+          aria-label="open sidebar"
+          class="btn btn-square btn-ghost ml-2"
+        >
+          <Menu />
+        </label>
+      </div>
+    </div>
+  </div>
+</header>
