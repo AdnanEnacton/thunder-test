@@ -11,7 +11,7 @@
     ]
   },
   "media": {
-    "root": "public/images",
+    "root": "public",
     "publicPath": "public"
   },
   "git": {
